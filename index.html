@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="column left">
+            <div class="box">
+                <h3>CDP Fleet</h3>
+                <div class="scrollable-content">
+                    <div class="cdp-row">
+                        <span>CDP #1</span>
+                        <span class="icon">🔋 85%</span>
+                        <span class="icon">📍Moab, UT</span>
+                        <span class="icon">🏢 Station 1</span>
+                    </div>
+                    <div class="cdp-row">
+                        <span>CDP #2</span>
+                        <span class="icon">🔋 78%</span>
+                        <span class="icon">📍Lake City, MI</span>
+                        <span class="icon">🏢 Station 2</span>
+                    </div>
+                    <div class="cdp-row">
+                        <span>CDP #3</span>
+                        <span class="icon">🔋 92%</span>
+                        <span class="icon">📍Chesnee, SC</span>
+                        <span class="icon">🏢 Station 3</span>
+                    </div>
+                    <div class="cdp-row">
+                        <span>CDP #4</span>
+                        <span class="icon">🔋 75%</span>
+                        <span class="icon">📍Emery, UT</span>
+                        <span class="icon">🏢 Station 4</span>
+                    </div>
+                    <div class="cdp-row">
+                        <span>CDP #5</span>
+                        <span class="icon">🔋 88%</span>
+                        <span class="icon">📍Boiling Springs, SC</span>
+                        <span class="icon">🏢 Station 3</span>
+                    </div>
+                    <div class="cdp-row">
+                        <span>CDP #6</span>
+                        <span class="icon">🔋 52%</span>
+                        <span class="icon">📍Tamarach, MN</span>
+                        <span class="icon">🏢 Station 5</span>
+                    </div>
+                    <!-- Add more rows as needed -->
+                </div>
+            </div>
+
+
+
+            <div class="box">
+                <h3>Camera Feed</h3>
+                <div id="camera-feed" class="camera-feed">Camera 1 Feed</div>
+                <div class="camera-controls">
+                    <button onclick="switchCamera(1)">Front</button>
+                    <button onclick="switchCamera(2)">Right</button>
+                    <button onclick="switchCamera(3)">Left</button>
+                    <button onclick="switchCamera(4)">Rear</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="column middle">
+            <div class="box">
+                <h3>Satellite & Cell Connectivity Chart</h3>
+                    <iframe src="https://satellitemap.space/" width="100%" height="350px" style="border:none;"></iframe>
+                </div>
+
+
+            
+            <div class="box">
+                <h3>Operations & Maintenance</h3>
+                <div class="stats">
+                    <p>Motor Health: <span>✅ Good</span></p>
+                    <p>Internal Temp: <span>🌡️ 37°C</span></p>
+                    <p>Battery Health: <span>⚡ 90%</span></p>
+                    <p>Interior Humidity: <span>💧 45%</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="box">
+                <h3>Power Stats</h3>
+                <p><div id="battery-container"></div></p>
+                <p>Capacity: 28kWh</p>
+                <p>Range: 180 mi</p>
+                <p>Charge: 23.5kWh</p>
+                <p>Health: 95%</p>
+                <p>Temp: 25 C</p>
+                <p>Time Re: 12 hours</p>
+
+            </div>
+            <div class="box">
+                <h3>Map</h3>
+                <p>Homeward Health
+		</br>
+		 <div id="map"></div>
+		 </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Leaflet.js CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
