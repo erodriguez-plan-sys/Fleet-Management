@@ -7,10 +7,10 @@ const API_KEY = "APIKEY";  // Replace with API key
 
 
 const cameraGifs = {
-    1: "assets/front.gif",
-    2: "assets/right.gif",
-    3: "assets/left.gif",
-    4: "assets/rear.gif"
+    1: "assets/front.jpg",
+    2: "assets/right.jpg",
+    3: "assets/left.jpg",
+    4: "assets/back.jpg"
 };
 
 
@@ -285,7 +285,7 @@ function updateAPI(cdpId) {
 
 
 let apiKey = "5b3ce3597851110001cf62487c72115a366d4df3a458833ad4dccb34";
-let map = L.map('map').setView([39.8283, -98.5795], 4); // Center of the US
+let map = L.map('map').setView([38.5733, -109.55], 10); // Center of the US
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -296,20 +296,13 @@ let selectedStart = null;
 
 // Array of CDP markers
 let markerData = [
-    { lat: 38.5733, lon: -109.55, name: "CDP #1" },
-    { lat: 44.3367, lon: -85.2095, name: "CDP #2" },
-    { lat: 35.1493, lon: -81.8632, name: "CDP #3" },
-    { lat: 38.9241, lon: -111.2496, name: "CDP #4" },
-    { lat: 34.8332, lon: -81.9929, name: "CDP #5" },
-    { lat: 46.6508, lon: -93.0335, name: "CDP #6" }
+    { lat: 38.5733, lon: -109.55, name: "CDP #1" }
 ];
+
 
 // Array of O&M center markers
 let omcMarkerData = [
-    { lat: 38.5733, lon: -109.55 - 0.8, name: "O&M Center #1" }, 
-    { lat: 44.3367, lon: -85.2095 - 3.9, name: "O&M Center #2" }, 
-    { lat: 35.1493, lon: -81.8632 + 0.5, name: "O&M Center #3" }, 
-
+    { lat: 38.5733, lon: -109.55 - 0.8, name: "O&M Center #1" }
 ];
 
 // Define custom icons for O&M centers
@@ -320,21 +313,22 @@ let omcIcon = L.icon({
     popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
 });
 
+
+// Add O&M center markers to map
+omcMarkerData.forEach(data => {
+    let marker = L.marker([data.lat, data.lon], { icon: omcIcon }).addTo(map)
+        .bindPopup(`${data.name} <br> <button onclick="setStart(${data.lat}, ${data.lon})">Select as Start</button>`);
+});
+
 // Add CDP markers to map
 markerData.forEach(data => {
     let marker = L.marker([data.lat, data.lon]).addTo(map)
         .bindPopup(`${data.name} <br> <button onclick="setStart(${data.lat}, ${data.lon})">Select as Start</button>`);
 });
 
-// Add O&M center markers to map
-omcMarkerData.forEach(data => {
-    let marker = L.marker([data.lat, data.lon], { icon: omcIcon }).addTo(map)
-        .bindPopup(`${data.name} <br> ${data.lat}, ${data.lon} <br> <button onclick="setStart(${data.lat}, ${data.lon})">Select as Start</button>`);
-});
-
 // Function to set selected start point
 function setStart(lat, lon) {
-    selectedStart = [lat, lon];
+    selectedStart = [38.5733, -109.55];
     // alert(`Selected starting point: ${lat.toFixed(5)}, ${lon.toFixed(5)}`);
 }
 
@@ -342,10 +336,7 @@ function setStart(lat, lon) {
 async function searchRoute() {
     let endInput = document.getElementById("end").value;
 
-    if (!selectedStart) {
-        alert("Please select a starting point.");
-        return;
-    }
+
 
     try {
         let endCoords = await getCoordinates(endInput);
@@ -364,6 +355,7 @@ async function searchRoute() {
 
 // Function to fetch route
 function fetchRoute(start, end) {
+    start = [38.5733, -109.55];
     let request = new XMLHttpRequest();
     request.open('POST', "https://api.openrouteservice.org/v2/directions/driving-car");
     request.setRequestHeader('Accept', 'application/json');
@@ -378,7 +370,7 @@ function fetchRoute(start, end) {
 
                 document.getElementById("distance").innerText = ((route.summary.distance / 1000) * 0.621371).toFixed(2) + " mi";
                             document.getElementById("duration").innerText = (route.summary.duration / 60).toFixed(2) + " min";
-                document.getElementById("traffic").innerText = "N/A (No Live Traffic)";
+                document.getElementById("traffic").innerText = "Moderate";
 
                 drawRoute(route.geometry);
             } else {
@@ -472,7 +464,7 @@ document.getElementById("resetBtn").addEventListener("click", resetMap);
 
 function resetMap() {
     // Reset the map view to the original center and zoom level
-    map.setView([39.8283, -98.5795], 4);
+    map.setView([38.5733, -109.55], 10);
 
     // Remove the route layer if it exists
     if (routeLayer) {
@@ -496,24 +488,11 @@ function clearTrafficSpots() {
 
 
 
-
-function toggleSpeaker() {
-    const speakerBtn = document.getElementById('speakerBtn');
-    speakerBtn.classList.toggle('active');
-    // Additional functionality for the speaker can go here
-    speak(1);
-}
-
 function toggleMicrophone() {
     const microphoneBtn = document.getElementById('microphoneBtn');
     microphoneBtn.classList.toggle('active');
     // Additional functionality for the microphone can go here
     mic(2);
-}
-
-function speak(id) {
-    console.log(`Speaker ${id} toggled.`);
-    // Implement speaker functionality here
 }
 
 function mic(id) {

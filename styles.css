@@ -148,3 +148,9 @@ body, html {
     background: #007bff;
     color: white;
 }
+
+
+.active {
+    background-color: #4CAF50; /* Green background for 'on' state */
+    color: white; /* White text */
+}

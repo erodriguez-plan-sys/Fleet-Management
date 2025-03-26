@@ -45,7 +45,7 @@
                         <span>CDP #4</span>
                         <span class="icon">75%</span>
                         <span class="icon">Emery, UT</span>
-                        <span class="icon">Station 4</span>
+                        <span class="icon">Station 1</span>
                     </div>
                     <div class="cdp-row" data-cdp-id="5" data-cdp-ta1="Ariadne" data-cdp-cp1="Lydia Kensington" data-cdp-cp2="Theodore Vaughn" data-cdp-important="2" data-cdp-cell-con="2" data-cdp-signal-c="Weak" data-cdp-status-c="OFF" data-cdp-sat-con="10" data-cdp-signal-s="Strong" data-cdp-status-s="ON" data-cdp-pwr-bat="52%" data-cdp-pwr-rng="92 mi" data-cdp-pwr-chrg="OFF" data-cdp-pwr-hlth="94%" data-cdp-pwr-tmp="40 C" data-cdp-pwr-re="5 hr" data-cdp-prc-nots="None" data-cdp-op-mtr="Good" data-cdp-op-tmp="19°C" data-cdp-op-hlth="88%" data-cdp-op-hum="24%" data-cdp-cur-loc="Moore, SC" data-cdp-cur-lat=34.8332 data-cdp-cur-lon=-81.9929>
                         <span>CDP #5</span>
@@ -57,7 +57,7 @@
                         <span>CDP #6</span>
                         <span class="icon">52%</span>
                         <span class="icon">Tamarach, MN</span>
-                        <span class="icon">Station 5</span>
+                        <span class="icon">Station 2</span>
                     </div>
                     <!-- Add more rows as needed -->
                 </div>
@@ -102,8 +102,8 @@
     <p>Communications:</p>
 
                 <div class="camera-controls">
-                    <button onclick="speak(1)">Speaker</button>
-                    <button onclick="mic(2)">Microphone</button>
+                    <button id="speakerBtn" onclick="toggleSpeaker()">Speaker</button>
+                    <button id="microphoneBtn" onclick="toggleMicrophone()">Microphone</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
                     <button onclick="emergency(3)" style="background-color: red; color: white;">Emergency</button>
                 </div>
@@ -112,6 +112,11 @@
 
             </div>
         </div>
+        <script>
+            function emergency(level) {
+                alert("Emergency Level " + level + " activated! Taking necessary actions.");
+            }
+            </script>
 
 
                     <!-- Center Column -->

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDP Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+
+
+
+                    <!-- Left Column -->
+
+
+        <div class="column left">
+            <div class="box">
+                <h2>Care Delivery Platform #1</h2>
+            <b>  &nbsp;&nbsp;<span>CDP #ID</span>
+                <span class="icon">| BATT 🔋</span>
+                <span class="icon">| LOC 📍</span>
+                <span class="icon">| STATION 🏢</span>
+            </b>
+                    <div class="cdp-row" data-cdp-id="1" data-cdp-ta1="Huntsman" data-cdp-cp1="None" data-cdp-cp2="None" data-cdp-important="None" data-cdp-cell-con="9" data-cdp-signal-c="Strong" data-cdp-status-c="ON" data-cdp-sat-con="2" data-cdp-signal-s="Weak" data-cdp-status-s="OFF" data-cdp-pwr-bat="85%" data-cdp-pwr-rng="160 mi" data-cdp-pwr-chrg="OFF" data-cdp-pwr-hlth="85%" data-cdp-pwr-tmp="45 C" data-cdp-pwr-re="15 hr" data-cdp-prc-nots="None" data-cdp-op-mtr="Good" data-cdp-op-tmp="23°C" data-cdp-op-hlth="85%" data-cdp-op-hum="45%" data-cdp-cur-loc="Moab, UT" data-cdp-cur-lat=38.5733 data-cdp-cur-lon=-109.5498>
+                        <span>CDP #1</span>
+                        <span class="icon">85%</span>
+                        <span class="icon">Moab, UT</span>
+                        <span class="icon">Station 1</span>
+                    </div>
+                    <!-- Add more rows as needed -->
+                    <h3>ID: <span id="selected-cdp">None</span></h3>
+
+            </hr>
+                <p><b>TA1 Performer:</b> <span id="selected-ta1">None</span>
+        </br>
+    </br>
+
+    <b>Care Practitioners:</b> <br>
+    <span id="selected-cp1">None</span> / <span id="selected-cp2">None</span>
+    <br>
+    <input type="text" id="cp1-input" style="display:none;" placeholder="Enter CP1">
+    <input type="text" id="cp2-input" style="display:none;" placeholder="Enter CP2">
+    <button id="edit-cp" onclick="editCP()">Edit</button>
+    <button id="save-cp" onclick="saveCP()" style="display:none;">Save</button>
+    <br><br>
+    
+    <b>Scheduled Visits:</b> <span id="selected-important">None</span>
+    <br>
+    <select id="scheduled-visits" onchange="updateScheduledVisits()">
+        <option value="None">None</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+   
+    
+    <h4>Pre-Flight Checklist</h4>
+    <div style="width: 350px; height: 80px; overflow-y: auto; border: 1px solid #ccc; position: relative; top: -15px;">
+        <ul>
+            <li><input type="checkbox"> Turn on auxiliary/IT equipment</li>
+            <li><input type="checkbox"> Verify system diagnostics</li>
+            <li><input type="checkbox"> Check battery charge level</li>
+            <li><input type="checkbox"> Inspect charging connections</li>
+            <li><input type="checkbox"> Test communication systems</li>
+            <li><input type="checkbox"> Verify emergency medical equipment</li>
+            <li><input type="checkbox"> Ensure all sensors are functional</li>
+            <li><input type="checkbox"> Check tire pressure and condition</li>
+            <li><input type="checkbox"> Confirm navigation and route plan</li>
+            <li><input type="checkbox"> Secure all loose items in the cabin</li>
+        </ul>
+    </div>
+        
+
+
+
+
+
+
+
+
+
+    <script>
+    function editCP() {
+        document.getElementById('cp1-input').style.display = 'inline';
+        document.getElementById('cp2-input').style.display = 'inline';
+        document.getElementById('save-cp').style.display = 'inline';
+        document.getElementById('edit-cp').style.display = 'none';
+    }
+    
+    function saveCP() {
+        let cp1 = document.getElementById('cp1-input').value;
+        let cp2 = document.getElementById('cp2-input').value;
+        
+        document.getElementById('selected-cp1').innerText = cp1 || 'None';
+        document.getElementById('selected-cp2').innerText = cp2 || 'None';
+        
+        document.getElementById('cp1-input').style.display = 'none';
+        document.getElementById('cp2-input').style.display = 'none';
+        document.getElementById('save-cp').style.display = 'none';
+        document.getElementById('edit-cp').style.display = 'inline';
+    }
+    function updateScheduledVisits() {
+    let selectedValue = document.getElementById('scheduled-visits').value;
+    document.getElementById('selected-important').innerText = selectedValue;
+}
+function editNotes() {
+    document.getElementById('prac-notes-input').style.display = 'inline';
+    document.getElementById('save-notes').style.display = 'inline';
+    document.getElementById('edit-notes').style.display = 'none';
+}
+
+function saveNotes() {
+    let notes = document.getElementById('prac-notes-input').value;
+    document.getElementById('prac-notes').innerText = notes || 'None';
+    document.getElementById('prac-notes-input').style.display = 'none';
+    document.getElementById('save-notes').style.display = 'none';
+    document.getElementById('edit-notes').style.display = 'inline';
+}
+
+    </script>
+    
+
+            </div>
+
+
+
+            <div class="box">
+                <h3>Camera Feed</h3>
+                <img id="camera-feed" src="assets/blackbg.png" alt="Camera Feed" class="camera-image" style="width: 330px; height: 200px; background: black;">
+
+                <p>Camera Controls:</p>
+                <div class="camera-controls">
+                    <button onclick="switchCamera(1)">Front</button>
+                    <button onclick="switchCamera(2)">Right</button>
+                    <button onclick="switchCamera(3)">Left</button>
+                    <button onclick="switchCamera(4)">Rear</button>
+                </div>
+  
+
+
+    <p>Communications:</p>
+
+                <div class="camera-controls">
+                    <button id="microphoneBtn" onclick="toggleMicrophone()">Microphone</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                    <button onclick="emergency(3)" style="background-color: red; color: white;">Emergency</button>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <script>
+            function emergency(level) {
+                alert("Emergency Level " + level + " activated! Taking necessary actions.");
+            }
+            </script>
+            
+                    <!-- Center Column -->
+
+
+        
+        <div class="column middle">
+            <div class="box">
+                <h3>Satellite & Cell Connectivity Chart</h3>
+                    <iframe src="https://satellitemap.space/" width="100%" height="350px" style="border:none;"></iframe>
+                    <p>
+                        <strong>Cell Con:</strong> <span id="cellular-connectivity">None</span> 
+                        &nbsp;&nbsp;<strong>Signal:</strong> <span id="cellular-signal">None</span>
+                        <strong>Status:</strong> <span id="cellular-status">None</span> 
+                        &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        <strong>Sat Con:</strong> <span id="sattelite-connectivity">None</span>
+                        <strong>Signal:</strong> <span id="sattelite-signal">None</span>
+                        &nbsp;<strong>Status:</strong> <span id="sattelite-status">None</span> 
+                    </p>
+                                        
+                </div>
+
+
+                                
+                
+                <div class="box">
+                    <h3>Map</h3>
+                    <p><b>Current Location:</b><span id="current-location"> None</span></p>
+                    <input type="text" id="end" placeholder="Destination (City or Lat,Lng)" value="">
+                    <button onclick="searchRoute()">Find Route</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    <button id="resetBtn" onclick="toggleFeature(this, 'Reset')">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p></p>
+
+             <div id="map"></div>
+                    
+                </div>
+            </div>
+    
+
+
+                    <!-- Right Column -->
+
+
+
+        <div class="column right">
+            <div class="box">
+                <h3>Power Stats</h3>
+                <p><div id="battery-health">Battery: None</div></p>
+                <p>Capacity: 28kWh</p>
+                <p><div id="power-range">Range: None</div></p>
+                <p><div id="power-charge">Charge: None</div></p>
+                <p><div id="power-health">Health: None</div></p>
+                <p><div id="power-temp">Temp: None</div></p>
+                <p><div id="power-remain">Time Re: None</div></p>
+            </br>
+            <b>Practitioner Notes:</b> <br>
+            <div id="prac-notes">None</div>
+            <input type="text" id="prac-notes-input" style="display:none;" placeholder="Enter notes">
+            <button id="edit-notes" onclick="editNotes()">Edit</button>
+            <button id="save-notes" onclick="saveNotes()" style="display:none;">Save</button>
+                        
+            </div>
+            <div class="box">
+                <h3>Operations</h3>
+                <div class="stats">
+                    <p>
+                    <div id="motor-health">Motor: None</div>
+                </br>
+                    <div id="internal-temp">Int Temp: None</div>
+                </br>
+                    <div id="internal-humid">Humidity: None</div>
+                </p>
+                </div>
+
+                <h3>Nav Info</h3>
+                <div class="stats">
+                    <p>Distance: <span id="distance">-</span></p>
+                    <p>Estimated Time:<span id="duration">-</span></p>
+                    <p>Traffic Info:<span id="traffic">N/A</span></p>
+                    <p class="temp">Temperature: None</p>
+                    <p class="summary">Condition: None</p>
+                    <p class="wind-speed">Wind Speed: None</p>
+                    <p class="wind-direction">Wind Direction: None</p>
+                </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Leaflet.js CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script src="scriptcdp.js"></script>
+</body>
+</html>
+
